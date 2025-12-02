@@ -36,7 +36,7 @@ Unlike simple CRUD apps, TechVault enforces **Business Logic Validation** (preve
 * **Quick Actions:** AJAX-free Modals for instant asset and user onboarding.
 
 ### Snapshot
-![Sample Output](https://github.com/srishti-cmd/ML-Website/blob/master/output.png)
+![Sample Output](https://github.com/srishti-cmd/TechVault---IT-Asset-Management-System/blob/main/TechVault-Dashboard.png)
 
 ---
 
