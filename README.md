@@ -54,28 +54,37 @@ Unlike simple CRUD apps, TechVault enforces **Business Logic Validation** (preve
 
 Follow these steps to run the project locally.
 
-#### 1. Clone the repository (replace URL with your repo)
-git clone https://github.com/YOUR_USERNAME/techvault.git
-cd techvault
-
-#### 2. Create Virtual Environment
-python -m venv venv
-
-#### 3. Activate Virtual Environment
-venv\Scripts\activate
-
-#### 4. Install Dependencies
-pip install django djangorestframework djangorestframework-simplejwt Pillow
-
-#### OR (If you have a requirements.txt file)
-pip install -r requirements.txt
-
-#### 5. Initialize Database
-python manage.py makemigrations
-python manage.py migrate
-
-#### 6. Create Admin User
-python manage.py createsuperuser
-
-#### 7. Run Server
-python manage.py runserver
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/techvault.git
+   cd techvault
+   ```
+2. Create Virtual Environment
+   ```bash
+   python -m venv venv
+   ```
+3. Activate Virtual Environment
+   ```bash
+   venv\Scripts\activate
+   ```
+4. Install Dependencies
+   ```bash
+   pip install django djangorestframework djangorestframework-simplejwt Pillow
+   ```
+OR (If you have a requirements.txt file)
+   ```bash
+   pip install -r requirements.txt
+   ```
+5. Initialize Database
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+6. Create Admin User
+   ```bash
+   python manage.py createsuperuser
+   ```
+7. Run Server
+   ```bash
+   python manage.py runserver
+   ```
