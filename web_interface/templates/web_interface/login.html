@@ -1,0 +1,39 @@
+{% extends 'web_interface/base.html' %} {% block content %}
+<div class="row justify-content-center" style="margin-top: 100px">
+  <div class="col-md-4">
+    <div class="card shadow p-4">
+      <h3 class="text-center mb-4">TechVault Login</h3>
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label>Email Address</label>
+          <input
+            type="email"
+            name="username"
+            class="form-control"
+            required
+            placeholder="admin@techvault.com"
+          />
+        </div>
+        <div class="mb-3">
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="mb-3 text-end">
+          <a
+            href="{% url 'password_reset' %}"
+            class="text-decoration-none small"
+            >Forgot Password?</a
+          >
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Sign In</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
