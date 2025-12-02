@@ -35,6 +35,9 @@ Unlike simple CRUD apps, TechVault enforces **Business Logic Validation** (preve
 * **Real-time Stats:** Live counters for Available, Assigned, and Broken items.
 * **Quick Actions:** AJAX-free Modals for instant asset and user onboarding.
 
+### Snapshot
+![Sample Output](https://github.com/srishti-cmd/ML-Website/blob/master/output.png)
+
 ---
 
 ## 🛠️ Tech Stack
@@ -71,7 +74,7 @@ Follow these steps to run the project locally.
    ```bash
    pip install django djangorestframework djangorestframework-simplejwt Pillow
    ```
-OR (If you have a requirements.txt file)
+   OR (If you have a requirements.txt file)
    ```bash
    pip install -r requirements.txt
    ```
