@@ -54,7 +54,7 @@ Unlike simple CRUD apps, TechVault enforces **Business Logic Validation** (preve
 
 Follow these steps to run the project locally.
 
-### 1. Clone the repository (replace URL with your repo)
+#### 1. Clone the repository (replace URL with your repo)
 git clone https://github.com/YOUR_USERNAME/techvault.git
 cd techvault
 
