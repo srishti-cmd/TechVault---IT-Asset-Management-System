@@ -3,10 +3,11 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404,redirect
 from .models import Asset, Category
 from .serializers import AssetSerializer, CategorySerializer
 from users.permissions import IsAdmin 
+from django.contrib import messages
 
 User = get_user_model()
 
@@ -83,4 +84,22 @@ class AssetViewSet(viewsets.ModelViewSet):
         asset.status = Asset.Status.AVAILABLE
         asset.save() 
 
-        return Response({"status": "success", "message": "Asset returned to pool"})
+        return Response({"status": "success", "message": "Asset returned to pool"})\
+    
+def mark_broken(request, asset_id):
+    if request.method == 'POST':
+        asset = get_object_or_404(Asset, id=asset_id)
+        asset.status = Asset.Status.BROKEN
+        asset.assigned_to = None  # Clear holder automatically
+        asset.save()
+        messages.warning(request, f"{asset.name} has been marked as broken.")
+    return redirect('dashboard')
+
+def mark_available(request, asset_id):
+    if request.method == 'POST':
+        asset = get_object_or_404(Asset, id=asset_id)
+        asset.status = Asset.Status.AVAILABLE
+        asset.assigned_to = None  # Ensure it's not held by anyone
+        asset.save()
+        messages.success(request, f"{asset.name} is now back in the inventory!")
+    return redirect('dashboard')

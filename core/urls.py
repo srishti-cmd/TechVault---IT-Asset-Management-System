@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -32,6 +33,17 @@ urlpatterns = [
 
     # Add this for Password Reset:
     path('accounts/', include('django.contrib.auth.urls')),
+
+    # 1. The schema (raw data file)
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    
+    # 2. Swagger UI (The interactive dashboard)
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    
+    # 3. Redoc (Optional, clean static documentation)
+    path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+
+    path('inventory/',include('inventory.urls')),
 ]
 
 if settings.DEBUG:

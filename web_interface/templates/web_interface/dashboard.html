@@ -183,9 +183,10 @@
             {% else %}
             <span class="text-muted small">--</span>
             {% endif %}
-          </td>
+          </td> 
+          
 
-          {% if is_admin %}
+          {% comment %} {% if is_admin %}
           <td class="text-end pe-4">
             <div class="d-flex justify-content-end align-items-center gap-2">
               {% if asset.status == 'AVAILABLE' %}
@@ -223,6 +224,56 @@
                 class="btn btn-sm btn-outline-danger"
                 onclick="return confirm('Delete this asset?');"
               >
+                <i class="fas fa-trash"></i>
+              </a>
+            </div>
+          </td>
+          {% endif %} {% endcomment %}
+          {% if is_admin %}
+          <td class="text-end pe-4">
+            <div class="d-flex justify-content-end align-items-center gap-2">
+              
+              {% if asset.status == 'AVAILABLE' %}
+              <form action="{% url 'web_checkout' asset.id %}" method="post" class="d-flex gap-1">
+                {% csrf_token %}
+                <select name="employee_id" class="form-select form-select-sm" style="width: 130px" required>
+                  <option value="" selected disabled>Assign...</option>
+                  {% for emp in employees %}
+                  <option value="{{ emp.id }}">{{ emp.first_name }}</option>
+                  {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-sm btn-dark"><i class="fas fa-check"></i></button>
+              </form>
+
+              {% elif asset.status == 'ASSIGNED' %}
+              <form action="{% url 'web_return' asset.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-warning"><i class="fas fa-undo"></i></button>
+              </form>
+              {% endif %}
+
+              {% if asset.status != 'BROKEN' %}
+              <form action="{% url 'mark_broken' asset.id %}" method="post" class="m-0">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-outline-warning" 
+                        onclick="return confirm('Mark this asset as broken?');">
+                  <i class="fas fa-hammer"></i>
+                </button>
+              </form>
+              {% endif %}
+
+              {% if asset.status == 'BROKEN' %}
+              <form action="{% url 'mark_available' asset.id %}" method="post" class="m-0">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-outline-success" 
+            title="Mark as Repaired/Available">
+              <i class="fas fa-tools"></i> 
+              </button>
+              </form>
+              {% endif %}
+
+              <a href="{% url 'delete_asset' asset.id %}" class="btn btn-sm btn-outline-danger" 
+                 onclick="return confirm('Delete this asset?');">
                 <i class="fas fa-trash"></i>
               </a>
             </div>

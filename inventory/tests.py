@@ -65,3 +65,21 @@ class AssetFlowTests(APITestCase):
         url = reverse('asset-list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_broken_asset_cannot_be_checked_out(self):
+        """
+        Verify that if an asset is marked BROKEN, the API rejects a checkout request.
+        """
+        # 1. Mark the asset as broken
+        self.asset.status = Asset.Status.BROKEN
+        self.asset.save()
+
+        # 2. Try to checkout via API
+        url = reverse('asset-checkout', args=[self.asset.id])
+        data = {'employee_id': self.employee.id}
+        response = self.client.post(url, data, format='json')
+
+        # 3. Check: Did it fail with a 400 Bad Request?
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("Cannot check out", response.data['error'])
+        print("\n✅ API Security Test: Broken assets correctly blocked from checkout.")
