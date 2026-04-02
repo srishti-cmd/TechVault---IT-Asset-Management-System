@@ -39,6 +39,8 @@ This version has been **production-hardened**, moving from a local SQLite develo
 * **Real-time Stats:** Live counters for Available, Assigned, and Broken items.
 * **Hybrid Architecture:** Django Templates for speed, integrated with **Chart.js** for interactive analytics.
 
+![Sample Output](https://github.com/srishti-cmd/TechVault---IT-Asset-Management-System/blob/main/TechVault-Dashboard.png)
+
 ---
 
 ## 🛠️ Tech Stack
